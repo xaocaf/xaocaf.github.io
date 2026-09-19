@@ -1,276 +1,156 @@
-*
-{
-	padding: 0px;
-	margin: 0px;
-	box-sizing: border-box;
+:root{
+  --bg:#000000;
+  --fg:#ece7dc;
+  --dim:#86816f;
+  --line: rgba(236,231,220,0.09);
 }
-body
-{
-	font-family: monospace;
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:88px;}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Inter', sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
 }
-.container
-{
-	display: flex;
-	flex-direction: row;
-}
-.navbar_mobile
-{
-	display: none;
-	margin-bottom: 5%;
-}
-.mtitle
-{
-   width: 50%;
-   font-size: 15px;
-   padding-top: 10px;
-   margin-left: 10%;
-}
-.mnav
-{
-	width: 50%;
-}
-#menu_list
-{
-   padding-top: 15px;
-   text-align: center;
-   text-transform: lowercase;
-   display: none;
-   transition: 0.2s;
-}
-#menu_button
-{
-   position: relative;
-   top: 25px;
-   float: right;
-   width: 15%;
-   height:5px;
-   margin-right: 20%;
-   background-color: #000000;
-}
-#menu_button::before
-{
-   content: "";
-   position: absolute;
-   top: -10px;
-   width: 100%;
-   height: 5px;
-   background-color: #000000;
-}
-#menu_button::after
-{
-   content: "";
-   position: absolute;
-   top: 10px;
-   width: 100%;
-   height: 5px;
-   background-color: #000000;
-}
-.navbar_desktop
-{   
-    display: flex;
-    flex-direction: column;
-    width :20%;
-}
-.content 
-{
-	display: flex;
-  	flex-direction: column;
-  	width: 80%;
-  	padding-top: 5%;
-}
-.list
-{
-   text-transform: lowercase;
-   text-align: left;
-   padding: 25%;
-}
-.title
-{
-	font-size:30px;
-}
-.items
-{
-    list-style: none;
-}
-.item
-{
-   text-decoration:none;
-   font-size: 15px;
-   color: #000000;
-}
-.item:hover
-{
-   font-weight: bold;
-}
-.active
-{
-	color: #999999fa;
-}
-li
-{
-	padding: 10px;
-}
-.icon
-{
-	width: 15px;
-}
-.footer
-{
-	padding-top: 30px;
-}
-.row
-{
-	display: flex;
-	flex-wrap: wrap;
-	padding-top: 10px;
-}
-.fragments
-{
-  display: flex;
-  flex-direction: column;
-  flex: 20%;
-}
-.fragments img
-{
-	margin-top: 10%;
-  width: 45%;
-}
-.about
-{
-  display: flex;
-  padding-top: 30px;
-}
-.about_text
-{
-  flex: 50%;
-  padding: 10px;
-  text-align: justify;
-}
-.about_text p
-{
-  padding-bottom: 10px;
-}
-.about_img
-{
-  flex: 50%;
-  padding: 10px;
-}
-.about_img img
-{
-  width: 90%;
-}
-.form_control
-{
-  padding: 10px;
-  margin-bottom: 3%;
-  width: 100%;
-}
-#user_email
-{
-  height: 7%;
-}
-#user_message
-{
-  height: 200px;
-}
-textarea
-{
-  resize: none;
-}
-#submit_button
-{
-  background-color: #000000;
-  color: #ffffff;
-  transition: 0.2s;
-  width: 80px;
-  height: 40px;
-  border: 0px;
-}
-#submit_button:hover
-{
-  cursor: pointer;
-  color: #999999fa;
-}
-#submit_button:active
-{
-  background-color: #ffffff;
-  color: #000000;
-}
-/* makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px)
-{
-  .fragments
-  {
-    flex: 50%;
-    max-width: 50%;
-  }
+h1,h2,.serif{font-family:'Fraunces', serif;font-weight:300;letter-spacing:-0.01em;}
+a{color:inherit;text-decoration:none;}
+a.u{border-bottom:1px solid var(--dim);padding-bottom:1px;}
+a.u:hover{border-color:var(--fg);}
+a:focus-visible{outline:1px solid var(--fg);outline-offset:3px;}
+.x{max-width:640px;margin:0 auto;padding:0 26px;}
 
-  .fragments img
-  {
-  	width: 80%;
-  }
-  .title
-  {
-   padding-top: 10px;
-  	font-size: 20px;
-  }
-  .subtitle
-  {
-  	font-size: 15px;
-  	text-align: center;
-  }
-  .item
-  {
-    font-size: 10px;
-  }
-  .about
-  {
-    flex-direction: column;
-  }
+/* nav — shared, identical on every page */
+nav{position:fixed;top:0;left:0;right:0;z-index:10;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:500;letter-spacing:0.01em;background:rgba(0,0,0,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+nav a{opacity:0.85;transition:opacity 0.2s ease;}
+nav a:hover{opacity:1;}
+nav .links{display:flex;gap:26px;}
 
+/* hero — homepage only, one orchestrated entrance */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 26px;position:relative;}
+.hero .name{font-size:13px;letter-spacing:0.06em;color:var(--dim);margin-bottom:26px;}
+.hero h1{font-size:clamp(38px,7.5vw,64px);line-height:1.22;font-weight:300;max-width:15ch;}
+.hero .scroll{position:absolute;bottom:34px;font-size:11px;letter-spacing:0.08em;color:var(--dim);}
+.enter{opacity:0;transform:translateY(10px);transition:opacity 0.9s ease, transform 0.9s ease;}
+.enter.in{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion: reduce){
+  .enter{opacity:1;transform:none;transition:none;}
 }
 
-/*  makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px)
-{
-  .fragments 
-  {
-    flex: 100%;
-    max-width: 100%;
-  }
-  .fragments img
-  {
-    width:  100%;
-    margin-top: 1%;
-    }
-  .content
-  {
-  	width: 100%;
-  }
+.block{padding-top:120px;padding-bottom:120px;}
+.eyebrow{font-size:12px;letter-spacing:0.03em;color:var(--dim);margin-bottom:24px;display:block;}
 
+/* homepage intro statement pair */
+.statement{font-size:clamp(21px,3.2vw,28px);font-weight:300;line-height:1.5;max-width:19ch;font-family:'Fraunces',serif;}
+.statement + .statement{margin-top:54px;text-align:right;margin-left:auto;}
+
+/* photography — asymmetric, not a grid; shared by homepage teaser and full archive */
+.frames{display:flex;flex-direction:column;gap:56px;}
+.frame.a{width:100%;}
+.frame.b{width:72%;margin-left:auto;}
+.frame.c{width:86%;}
+.frame.d{width:58%;}
+.shot{display:block;width:100%;aspect-ratio:3/4;background:linear-gradient(150deg,#3a3833,#050504);object-fit:cover;transition:filter 0.3s ease;}
+.shot.wide{aspect-ratio:16/9;}
+.shot.square{aspect-ratio:1/1;}
+figure:hover .shot{filter:brightness(1.08);}
+figcaption{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:14px;}
+.archive-link{display:inline-block;margin-top:8px;font-size:13px;}
+
+/* archive-only: year grouping and diptych pairs */
+.intro{padding:150px 26px 80px;text-align:center;}
+.intro .eyebrow{margin-bottom:20px;}
+.intro h1{font-size:clamp(40px,7vw,60px);}
+.intro p{font-size:14px;color:var(--dim);margin-top:18px;}
+main{padding-bottom:100px;}
+.year-group{padding:70px 0;}
+.year-group:first-of-type{padding-top:20px;}
+.year-group + .year-group{border-top:1px solid var(--line);}
+.year{font-family:'Fraunces',serif;font-weight:300;font-size:16px;color:var(--dim);display:block;margin-bottom:40px;}
+.pair{display:flex;gap:24px;width:100%;}
+.pair .frame{width:50%;flex:1;}
+
+/* development — each item gets a small visual companion */
+.work-item{padding:44px 0;display:flex;gap:26px;}
+.work-item + .work-item{border-top:1px solid var(--line);}
+.thumb{flex:0 0 64px;height:64px;background:linear-gradient(155deg,#33312b,#0d0c0a);align-self:start;}
+.work-body h2{font-size:22px;margin-bottom:8px;font-weight:400;}
+.work-body p{font-size:14px;color:var(--dim);max-width:44ch;margin-bottom:12px;}
+.work-body .meta{font-size:12px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap;}
+.status{font-size:11px;letter-spacing:0.03em;border:1px solid var(--line);padding:3px 8px;border-radius:2px;}
+
+/* log */
+.log-intro{font-size:14px;color:var(--dim);max-width:44ch;margin-bottom:36px;}
+.log-entry{display:flex;gap:22px;padding:16px 0;font-size:14px;}
+.log-entry + .log-entry{border-top:1px solid var(--line);}
+.log-entry .date{color:var(--dim);flex:0 0 78px;font-size:12px;padding-top:2px;}
+
+/* about */
+.about p{font-size:clamp(19px,2.6vw,23px);font-weight:300;font-family:'Fraunces',serif;line-height:1.6;max-width:26ch;}
+.about .loc{font-size:13px;color:var(--dim);margin-top:26px;font-family:'Inter',sans-serif;}
+
+/* aside-shot — the one shared "small photo" pattern, used in About and Contact.
+   Each keeps its own honest aspect ratio (a34 = 3:4, a11 = 1:1) rather than
+   being forced into a single crop. */
+.aside-shot{width:220px;margin:44px auto;}
+.aside-shot img{width:100%;display:block;object-fit:cover;transition:filter 0.3s ease;}
+.aside-shot:hover img{filter:brightness(1.08);}
+.aside-shot.a34 img{aspect-ratio:3/4;}
+.aside-shot.a11 img{aspect-ratio:1/1;}
+
+/* footer nudge — points at Instagram, sits above the icon row */
+.fnudge{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.fnudge-text{
+  font-family:'Fraunces', serif;
+  font-weight:300;
+  font-size:clamp(20px,3vw,26px);
+  color:var(--fg);
+  letter-spacing:-0.01em;
 }
-/* mobile navbar switch */
-@media only screen and (max-width: 600px)
-{
-  div.navbar_desktop
-  {
-    display: none;
-  }
-  div.navbar_mobile
-  {
-   display: block;
-  }
-  div.navbar_header
-  {
-    display: flex;
-    flex-direction: row;
-  }
-  .container
-  {
-  	display: block;
-  }
-  .item
-  {
-    font-size: 15px;
-  }
+.fnudge-arrow{width:44px;height:64px;color:var(--dim);}
+.fnudge-arrow path{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+@media (prefers-reduced-motion:no-preference){
+  .fnudge-arrow{animation:fnudge-bob 2.4s ease-in-out infinite;}
+}
+@keyframes fnudge-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+.contact{text-align:center;}
+.contact .aside-shot{margin:0 auto 40px;}
+.contact h2{font-size:clamp(30px,5vw,44px);font-weight:300;}
+
+/* footer — shared by every page */
+footer{padding:64px 26px 56px;}
+.foot{display:flex;flex-direction:column;align-items:center;gap:22px;}
+.ficons{display:flex;gap:22px;}
+.ficons a{color:var(--dim);display:flex;align-items:center;justify-content:center;width:38px;height:38px;transition:color 0.2s ease;}
+.ficons a:hover{color:var(--fg);}
+.brand{font-size:12px;letter-spacing:0.01em;color:var(--dim);}
+
+@media(max-width:640px){
+  html{scroll-padding-top:118px;}
+  .x{padding:0 24px;}
+  .block{padding-top:90px;padding-bottom:90px;}
+  .hero{padding:110px 24px 100px;}
+
+  nav{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 24px;}
+  nav .links{gap:20px;flex-wrap:wrap;}
+
+  .statement + .statement{text-align:left;margin-left:0;margin-top:32px;}
+
+  .work-item{gap:16px;padding:36px 0;}
+  .thumb{flex-basis:44px;height:44px;}
+  .work-body p{max-width:none;}
+
+  .frame.b,.frame.c,.frame.d{width:100%;}
+  .frames{gap:44px;}
+
+  .log-entry{flex-direction:column;gap:6px;padding:18px 0;}
+  .log-entry .date{flex-basis:auto;}
+
+  .intro{padding:130px 24px 60px;}
+  .year-group{padding:50px 0;}
+  .pair{flex-direction:column;gap:44px;}
+  .pair .frame{width:100%;}
+
+  .aside-shot{width:180px;}
 }

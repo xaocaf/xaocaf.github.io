@@ -1,56 +1,56 @@
-window.addEventListener("load", function()
-{
-	shuffleFragments()
+document.querySelectorAll('.hero .enter').forEach(function (el, i) {
+  setTimeout(function () { el.classList.add('in'); }, 150 + i * 180);
 });
 
-// toggle mobile navbar
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-toggle = false
+  var style = document.createElement('style');
+  style.textContent =
+    '#page-fade{position:fixed;inset:0;z-index:2147483647;background:#000;opacity:1;transition:opacity 0.38s ease;pointer-events:none;}' +
+    '#page-fade.done{opacity:0;}' +
+    '#page-fade.lock{pointer-events:auto;}';
+  document.head.appendChild(style);
 
-document.getElementById("menu_button").addEventListener("click", function()
-{
-	if (toggle == false)
-	{
-		document.getElementById("menu_list").style.display = "block"
-		toggle = true
-	}
-	else if (toggle == true)
-	{
-		document.getElementById("menu_list").style.display = "none"
-		toggle = false
-	}
-})
+  var overlay = document.createElement('div');
+  overlay.id = 'page-fade';
+  document.body.appendChild(overlay);
 
-// count how many times fragment is shown
-function isFragmentShown(array, fragment)
-{
-    var count = 0
-    for (var i = 0; i < array.length; i++)
-    {
-        if (array[i] === fragment)
-        {
-            count++
-        }
-    }
-    return count
-}
+  function reveal() {
+    overlay.classList.add('done');
+  }
 
-// shuffle and randomly show fragments
-function shuffleFragments() {
-    var fragment = document.querySelectorAll("#fragment");
-    var usedFragments = [];
-    var minImageNumber = 118524620;
-    var maxImageNumber = 118524647;
-    var totalImages = maxImageNumber - minImageNumber + 1;
+  overlay.addEventListener('transitionend', function () {
+    if (overlay.classList.contains('done')) overlay.style.display = 'none';
+  });
 
-    for (var i = 0; i < fragment.length; i++) {
-        while (true) {
-            var random = Math.floor(Math.random() * totalImages) + minImageNumber;
-            if (isFragmentShown(usedFragments, random) == 0) {
-                fragment[i].setAttribute("src", "assets/fragments/" + random + ".jpg");
-                usedFragments.push(random);
-                break;
-            }
-        }
-    }
-}
+  if (reduceMotion) {
+    overlay.style.display = 'none';
+    return;
+  }
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(reveal);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    var a = e.target.closest('a');
+    if (!a) return;
+
+    var href = a.getAttribute('href');
+    if (!href) return;
+
+    var url = new URL(a.href, location.href);
+    if (url.origin !== location.origin) return;
+
+    if (url.pathname === location.pathname) return;
+
+    e.preventDefault();
+    overlay.style.display = 'block';
+    overlay.classList.remove('done');
+    overlay.classList.add('lock');
+    setTimeout(function () { location.href = url.href; }, 380);
+  });
+})();
